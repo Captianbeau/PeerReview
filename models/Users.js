@@ -1,4 +1,5 @@
 const {Schema, Types} = require('mongoose');
+const thoughtsSchema = require('./Thoughts');
 
 const userSchema = new Schema(
     {
@@ -17,6 +18,8 @@ const userSchema = new Schema(
                 
             }
         },
+        thoughts:[thoughtsSchema],
+        friends:[userSchema],
     }
 );
 
