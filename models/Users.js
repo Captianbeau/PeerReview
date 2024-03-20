@@ -2,10 +2,7 @@ const {Schema, Types} = require('mongoose');
 
 const userSchema = new Schema(
     {
-        userId:{
-            type:Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
-        },
+
         username:{
             type:String,
             unique:true,
@@ -16,7 +13,9 @@ const userSchema = new Schema(
             type:String,
             required:true,
             unique:true,
-            validate:
-        }
+            validate:{
+                
+            }
+        },
     }
 )
