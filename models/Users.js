@@ -1,5 +1,4 @@
 const {Schema, Types} = require('mongoose');
-const thoughtsSchema = require('./Thoughts');
 
 const userSchema = new Schema(
     {
@@ -18,8 +17,9 @@ const userSchema = new Schema(
                 
             }
         },
-        thoughts:[thoughtsSchema],
-        friends:[userSchema],
+        thoughts:[{type: Schema.Types.ObjectId, ref:'thoughts'}],
+        // self reference friends?
+        friends:[{type: Schema.Types.ObjectId, ref: 'user'}],
     }
 );
 
