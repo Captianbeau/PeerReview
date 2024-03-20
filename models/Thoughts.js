@@ -13,4 +13,6 @@ const thoughtsSchema = new Schema(
         },
         
     }
-)
+);
+
+module.exports= thoughtsSchema;

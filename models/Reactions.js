@@ -13,4 +13,6 @@ const reactionsSchema = new Schema(
         },
         
     }
-)
+);
+
+module.exports = reactionsSchema;
