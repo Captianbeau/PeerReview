@@ -1,3 +1,4 @@
+// Create a virtual called `friendCount` that retrieves the length of the user's `friends` array field on query.
 const {Schema, Types} = require('mongoose');
 
 const userSchema = new Schema(
@@ -19,8 +20,10 @@ const userSchema = new Schema(
         },
         thoughts:[{type: Schema.Types.ObjectId, ref:'thoughts'}],
         // self reference friends?
-        friends:[{type: Schema.Types.ObjectId, ref: 'user'}],
+        friends:[{type: Schema.Types.ObjectId, ref: 'users'}],
     }
 );
 
-module.exports = userSchema;
+const Users = model('users', userSchema);
+
+module.exports = Users;
