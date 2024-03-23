@@ -11,6 +11,14 @@ const reactionsSchema = new Schema(
             required:true,
             max_length:280,
         },
+        username:{
+            type:Schema.Types.String,
+            required:true,
+        },
+        createdAt:{
+            type:Date,
+            default:Date.now,
+        }
         
     }
 );
