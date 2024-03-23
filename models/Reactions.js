@@ -12,7 +12,7 @@ const reactionsSchema = new Schema(
             max_length:280,
         },
         username:{
-            type:Schema.Types.String,
+            type:String,
             required:true,
         },
         createdAt:{
@@ -20,6 +20,12 @@ const reactionsSchema = new Schema(
             default:Date.now,
         }
         
+    },
+    {
+        toJSON:{
+            getters:true,
+        },
+        id:false,
     }
 );
 
