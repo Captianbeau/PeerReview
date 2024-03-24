@@ -9,3 +9,5 @@ router.route('/').get(getThoughts);
 
 router.route('/:_id')
 .get(getOneThought);
+
+module.exports = router;

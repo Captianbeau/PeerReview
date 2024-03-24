@@ -9,3 +9,5 @@ router.route('/').get(getUsers);
 
 router.route('/:_id')
 .get(getOneUser);
+
+module.exports = router;
