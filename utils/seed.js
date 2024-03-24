@@ -1,6 +1,6 @@
 const connection = require('../config/connection');
 const { Users, Thoughts } = require('../models');
-const { getRandomUser, getRandomEmail, getRandomThoughts } = require('./data');
+const { getUser, getEmail, getRandomThoughts } = require('./data');
 //get data from data.js through require
 
 connection.on('error', (err) => err);
@@ -9,21 +9,21 @@ connection.once('open', async () => {
     console.log('seed start')
 
     let userCheck = await connection.db.listCollections({ name: 'Users' }).toArray();
-    if (userCheck.length) {
-        await connection.dropCollection('Users');
-    }
+    // if (userCheck.length) {
+    //     await connection.dropCollection('Users');
+    // }
 
     let thoughtCheck = await connection.db.listCollections({ name: 'Thoughts' }).toArray();
-    if (thoughtCheck) {
-        await connection.dropCollection('Thoughts');
-    }
+    // if (thoughtCheck) {
+    //     await connection.dropCollection('Thoughts');
+    // }
 
     const users = [];
-    const thoughts = getRandomThoughts(10);
+    const thoughts = getRandomThoughts(20);
 
-    for (let i = 0; i < 20; i++) {
-        const username = getRandomUser();
-        const email = getRandomEmail();
+    for (let i = 0; i < 10; i++) {
+        const username = getUser(i);
+        const email = getEmail(i);
 
         users.push({
             username,

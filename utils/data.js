@@ -43,8 +43,6 @@ const emails = [
     'Citenth@oakmail.com',
 ];
 const thoughts = [
-    'Snails are overrated',
-    'Worms should be worshiped',
     'Rikki-tikki knew that he must catch her',
     'all the trouble would begin again',
     'She headed straight for the long grass by the thorn-bush',
@@ -103,12 +101,18 @@ const users = [];
 
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-const getRandomUser = ()=>
-`${getRandomArrItem(usernames)}, `;
+const getUser = (i)=>{
+const user = usernames[i];
+return user;
+}
 
-const getRandomEmail = () =>
-`${getRandomArrItem(emails)}`;
+const getRandomUser = () =>
+`${getRandomArrItem(usernames)}`
 
+const getEmail = (i)=>{
+    const email = emails[i];
+    return email;
+    }
 
 const getRandomThoughts = (int) => {
     let results = [];
@@ -136,4 +140,4 @@ const getRandomThoughts = (int) => {
     return results;
   };
 
-  module.exports = {getRandomUser, getRandomEmail, getRandomThoughts};
+  module.exports = {getUser, getEmail, getRandomThoughts};
