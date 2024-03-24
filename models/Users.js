@@ -21,9 +21,14 @@ const userSchema = new Schema(
                 message: `Needs a valid email`,
             },
         },
-        thoughtsS: [{ type: Schema.Types.ObjectId, ref: 'thought' }],
+        thoughts:[
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought',
+            }
+        ],
         // self reference friends?
-        friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+        friends: { type: Schema.Types.ObjectId, ref: 'User' },
     },
     {
         toJSON: {
@@ -37,6 +42,6 @@ userSchema.virtual('friendCount').get(() => {
     return this.friends.length;
 });
 
-const Users = model('users', userSchema);
+const User = model('User', userSchema);
 
-module.exports = Users;
+module.exports = User;

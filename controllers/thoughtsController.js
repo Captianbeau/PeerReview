@@ -1,10 +1,10 @@
-const {Thoughts, Users} = require('../models');
+const {Thought, User} = require('../models');
 
 module.exports = {
 
     async getThoughts(req,res){
         try{
-            const thoughts = await Thoughts.find().populate('thoughts');
+            const thoughts = await Thoughts.find().populate('thought');
             res.json(thoughts)
         }catch(err){
             res.status(500).json(err);
