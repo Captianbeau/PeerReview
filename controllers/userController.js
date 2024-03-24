@@ -4,8 +4,8 @@ module.exports = {
 
     async getUsers(req,res){
         try{
-            const users = await Users.find().populate('users');
-            res.json(users)
+            const usersData = await Users.find().populate('thoughtsS');
+            res.json(usersData)
         }catch(err){
             res.status(500).json(err);
         }
@@ -13,7 +13,7 @@ module.exports = {
 
     async getOneUser(req,res){
         try{
-            const user = await Users.findOne({_id: req.params._id});
+            const user = await Users.findOne({_id: req.params._id}).populate('thoughts');
 
             if(!user){
                 return res.status(404).json({ message:'User not found.'});
