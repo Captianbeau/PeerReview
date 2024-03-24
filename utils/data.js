@@ -79,7 +79,6 @@ const reactions = [
     'Proud of the house that I sew --',
     'Over and under, so weave I my music',
     '-- so weave I the house that I sew.',
-
     'Sing to your fledglings again',
     'Mother, oh lift up your head!',
     'Evil that plagued us is slain',
@@ -99,3 +98,42 @@ const reactions = [
     'Hear! I will sing you the praise of the bottle-tailed',
     'Rikki, with eyeballs of red!',
 ]
+
+const users = [];
+
+const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const getRandomUser = ()=>
+`${getRandomArrItem(usernames)}, `;
+
+const getRandomEmail = () =>
+`${getRandomArrItem(emails)}`;
+
+
+const getRandomThoughts = (int) => {
+    let results = [];
+    for (let i = 0; i < int; i++) {
+      results.push({
+        thoughtText: getRandomArrItem(thoughts),
+        reactions: [...getReactions(3)],
+        username: getRandomUser
+      });
+    }
+    return results;
+  };
+
+  const getReactions= (int) => {
+    if (int === 1) {
+      return getRandomArrItem(reactions);
+    }
+    const results = [];
+    for (let i = 0; i < int; i++) {
+      results.push({
+        tagBody: getRandomArrItem(reactions),
+        username: getRandomUser(),
+      });
+    }
+    return results;
+  };
+
+  module.exports = {getRandomUser, getRandomEmail, getRandomThoughts};
