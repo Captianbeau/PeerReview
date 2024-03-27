@@ -25,11 +25,24 @@ module.exports = {
     },
 
     async createThought(req,res){
-
+        try{
+            const thought = await Thought.create(req.body);
+            res.json(thought)
+        }catch(err){
+            res.json(err)
+        }
     },
 
     async deleteThought(req,res){
-
+        try{
+            const thought = await Thought.findOneAndDelete({_id: req.params._id});
+            if(!thought){
+                return res.status(404).json({message:'Thought not found'})
+            }
+            res.json({message:'Thought Deleted'});
+        }catch(err){
+            res.status(500).json(err);
+        }
     },
 
     async updateThought(req,res){

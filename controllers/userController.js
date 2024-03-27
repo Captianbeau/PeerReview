@@ -27,13 +27,34 @@ module.exports = {
         }
     },
 
-    // async createUser(req,res){
+    async createUser(req,res){
+try{
+    
+    const user = await User.create(req.body);
+    console.log(user)
+    res.json(user)
+}catch(err){
+    res.status(500).json(err)
+}
+    },
 
-    // },
-
-    // async deleteUser(req,res){
-
-    // },
+    async deleteUser(req,res){
+try{
+    const user = await User.findOneAndDelete({_id: req.params._id});
+    console.log(user)
+    if(!user){
+        return res.status(404).json({message:'User not found'});
+    }
+    // const thoughts = await Thought.findOneAndRemove(
+    //     {thought: req.params.username},
+    //     {}
+    // )
+    res.json({message: 'User Deleted'});
+}catch(err){
+    console.log(err)
+    res.status(500).json(err);
+}
+    },
 
     // async addFriend(req,res){
 
