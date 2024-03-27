@@ -28,6 +28,7 @@ module.exports = {
     },
 
     async createUser(req,res){
+        
 try{
     
     const user = await User.create(req.body);

@@ -25,6 +25,7 @@ module.exports = {
     },
 
     async createThought(req,res){
+        //add to User as well
         try{
             const thought = await Thought.create(req.body);
             res.json(thought)
