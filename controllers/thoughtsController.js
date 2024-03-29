@@ -28,7 +28,12 @@ module.exports = {
         //add to User as well
         try{
             const thought = await Thought.create(req.body);
-            res.json(thought)
+            const username = thought.thoughtText
+            const user = await User.findOneAndUpdate(
+                {username: username},
+                {$addToSet: {thoughts:thought.thoughtText}}
+                )
+            res.json(thought, user)
         }catch(err){
             res.json(err)
         }
