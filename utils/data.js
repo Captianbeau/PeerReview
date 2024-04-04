@@ -113,15 +113,15 @@ const getUser = () => {
   for (let i = 0; i < 10; i++) {
     const username = usernames[i];
     const email = emails[i];
-    const thoughts = getRandomThoughts(username, 5)
+    // const thoughts = getRandomThoughts(username, 5)
 
     user.push({
       username,
-      email,
-      thoughts
+      email
+      // thoughts
     });
 
-
+getRandomThoughts(username, 5)
   }
   console.log(user)
 }

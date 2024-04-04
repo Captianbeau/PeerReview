@@ -5,7 +5,7 @@ module.exports = {
     async getUsers(req,res){
         try{
             
-            const user = await User.find();
+            const user = await User.find().populate('thoughts');
             
             res.json(user)
 
