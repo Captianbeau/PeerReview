@@ -4,7 +4,7 @@ module.exports = {
 
     async getThoughts(req,res){
         try{
-            const thoughts = await Thought.find();
+            const thoughts = await Thought.find().populate('user');
             res.json(thoughts)
         }catch(err){
             res.status(500).json(err);
@@ -13,7 +13,7 @@ module.exports = {
 
     async getOneThought(req,res){
         try{
-            const thought = await Thought.findOne({_id: req.params._id});
+            const thought = await Thought.findOne({_id: req.params._id}).populate('user');
 
             if(!thought){
                 return res.status(404).json({ message:'Thought not found.'});
@@ -28,14 +28,17 @@ module.exports = {
         //add to User as well
         try{
             const thought = await Thought.create(req.body);
-            const username = thought.thoughtText
             const user = await User.findOneAndUpdate(
-                {username: username},
-                {$addToSet: {thoughts:thought.thoughtText}}
+                {_id: req.body._id},
+                {$addToSet: {thoughts:thought._id}},
+                {new:true}
                 )
-            res.json(thought, user)
+                if(!user){
+                    return res.status(404).json({message: 'thought made but user not found'})
+                }
+            res.json('thought created')
         }catch(err){
-            res.json(err)
+            res.status(500).json(err)
         }
     },
 

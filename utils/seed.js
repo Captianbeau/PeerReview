@@ -1,6 +1,6 @@
 const connection = require('../config/connection');
 const { User, Thought } = require('../models');
-const { getUser, user, thought } = require('./data');
+const { getUser, userData, thoughtData } = require('./data');
 //get data from data.js through require
 
 connection.on('error', (err) => err);
@@ -17,18 +17,29 @@ connection.once('open', async () => {
     if (thoughtCheck.length) {
         await connection.dropCollection('thoughts');
     }
+    getUser()
+
+    const users = await User.insertMany(userData);
+    const thoughts = await Thought.insertMany(thoughtData);
+
+    for (newThought of thoughts){
+        const tempUser = users[Math.floor(Math.random()* users.length)]
+        tempUser.thoughts.push(newThought._id);
+        await tempUser.save();
+        newThought.user.push(tempUser._id);
+        await newThought.save();
+
+        console.log(tempUser._id)
+    } 
 
 
 
-getUser()
 
 
+     
+    
 
-     await User.collection.insertMany(user);
-    await Thought.collection.insertMany(thought);
-
-    console.table(user);
-    console.table(thought);
+    console.table(users)
     console.info('Seeding Finished');
     process.exit(0);
 });

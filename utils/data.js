@@ -97,9 +97,9 @@ const reactions = [
   'Rikki, with eyeballs of red!',
 ]
 
-const user = [];
+const userData = [];
 
-const thought = [];
+const thoughtData = [];
 
 
 
@@ -115,38 +115,27 @@ const getUser = () => {
     const email = emails[i];
     // const thoughts = getRandomThoughts(username, 5)
 
-    user.push({
+    userData.push({
       username,
       email
       // thoughts
     });
-
-getRandomThoughts(username, 5)
   }
-  console.log(user)
+  getRandomThoughts(50)
 }
 
 
 
-const getRandomThoughts = (username, int) => {
-  let results = [];
+const getRandomThoughts = (int) => {
   for (let i = 0; i < int; i++) {
     const thoughtText = getRandomArrItem(thoughts);
     const reactions = [...getReactions(3)]
-    results.push({
-      thoughtText,
-      reactions,
 
-    });
-    thought.push({
+    thoughtData.push({
       thoughtText,
-      username,
       reactions
     })
   }
-
-  console.log(thought)
-  return results;
 };
 
 const getReactions = (int) => {
@@ -163,4 +152,4 @@ const getReactions = (int) => {
   return results;
 };
 
-module.exports = { getUser, user, thought };
+module.exports = { getUser, userData, thoughtData };
