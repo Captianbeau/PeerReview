@@ -7,6 +7,7 @@ module.exports = {
             const thoughts = await Thought.find().populate('user');
             res.status(200).json(thoughts)
         }catch(err){
+            console.log(err)
             res.status(500).json(err);
         }
     },
@@ -55,7 +56,21 @@ module.exports = {
     },
 
     async updateThought(req,res){
+        try{
+            const thought = await Thought.findOneAndUpdate(
+                {_id: req.params._id},
+                {$set: req.body},
+                {new:true}
+            );
 
+            if(!thought){
+                return res.status(404).json({message:'thought not found'})
+            }
+
+            res.json(thought)
+        }catch(err){
+            res.status(500).json(err)
+        }
     }
 
 }

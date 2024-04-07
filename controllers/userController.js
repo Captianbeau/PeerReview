@@ -6,7 +6,7 @@ module.exports = {
     async getUsers(req,res){
         try{
             
-            const user = await User.find().populate('thoughts');
+            const user = await User.find();
             
             res.json(user)
 
@@ -39,6 +39,23 @@ try{
     res.status(500).json(err)
 }
     },
+    async updateUser(req,res){
+        try{
+            const user = await User.findOneAndUpdate(
+                {_id: req.params._id},
+                {$set: req.body},
+                {new:true}
+            )
+            if(!user){
+                return res.status(404).json({message: 'user not found'})
+            }
+
+            res.json(user)
+        }catch(err){
+            console.log(err)
+            res.status(500).json(err)
+        }
+    },
 
     async deleteUser(req,res){
 try{
@@ -47,10 +64,11 @@ try{
     if(!user){
         return res.status(404).json({message:'User not found'});
     }
-    // const thoughts = await Thought.findOneAndRemove(
-    //     {thought: req.params.username},
-    //     {}
-    // )
+    const deleteThoughts = user.thoughts;
+    for(tempThought of deleteThoughts){
+    await Thought.findOneAndDelete({_id:tempThought._id})
+    console.log(tempThought)
+}
     res.json({message: 'User Deleted'});
 }catch(err){
     console.log(err)
@@ -64,7 +82,7 @@ try{
     const user = await User.findOneAndUpdate(
         {_id:req.params._id},
         {$addToSet: { friends: req.body}},
-        {runValidators: true, new: true}
+        {new: true}
     );
 
     if(!user){
@@ -75,7 +93,22 @@ try{
     res.status(500).json(err)
    }
     },
-    // async deleteFriend(req,res){
+    async deleteFriend(req,res){
+try{
+    const user = await User.findOneAndUpdate(
+        {_id: req.params._id},
+        {$pull: {friends: req.params.friendId}},
+        {runValidators: true}
+    )
 
-    // },
+    if(!user){
+        return res.status(404).json({message: 'user not found'})
+    }
+
+    res.json('friend deleted');
+
+}catch(err){
+    res.status(500).json(err);
+}
+    },
 }
