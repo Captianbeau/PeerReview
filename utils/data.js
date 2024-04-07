@@ -1,4 +1,5 @@
-const usernames = [
+ //data
+ const usernames = [
   'Leopold',
   'Mortas',
   'Fertuitus',
@@ -96,36 +97,36 @@ const reactions = [
   'Hear! I will sing you the praise of the bottle-tailed',
   'Rikki, with eyeballs of red!',
 ]
+//data end
 
+//empty arrays for collection data
 const userData = [];
-
 const thoughtData = [];
 
-
-
-
+//randomizer
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+//generates random username
 const getRandomUser = () =>
   `${getRandomArrItem(usernames)}`
 
+//compiles user data and calls thought data compiler
 const getUser = () => {
 
   for (let i = 0; i < 10; i++) {
     const username = usernames[i];
     const email = emails[i];
-    // const thoughts = getRandomThoughts(username, 5)
 
     userData.push({
       username,
       email
-      // thoughts
     });
   }
+
   getRandomThoughts(50)
 }
 
-
-
+//compiles thought data
 const getRandomThoughts = (int) => {
   for (let i = 0; i < int; i++) {
     const thoughtText = getRandomArrItem(thoughts);
@@ -138,11 +139,14 @@ const getRandomThoughts = (int) => {
   }
 };
 
+//generates random reaction and user for thoughts reactions
 const getReactions = (int) => {
   if (int === 1) {
     return getRandomArrItem(reactions);
   }
+
   const results = [];
+  
   for (let i = 0; i < int; i++) {
     results.push({
       reactions: getRandomArrItem(reactions),
