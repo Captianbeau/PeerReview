@@ -60,23 +60,20 @@ try{
 
     async addFriend(req,res){
         //make a POST create friend 
-    try{
-        const user = await User.findOneAndUpdate(
-            {_id:req.params._id},
-            {$addToSet: {friends: req.body}},
-            {new:true}
-        )
-        // const user = await User.findOne({_id: req.params._id})
-        // user.friends.push({_id: req.body._id})
-        //  await user.save()
-        if(!user){
-            return res.status(404).json({message: 'usernot found'})
-        }
-    }catch(err){
-        console.log(err)
-        res.status(500).json(err)
+   try{
+    const user = await User.findOneAndUpdate(
+        {_id:req.params._id},
+        {$addToSet: { friends: req.body}},
+        {runValidators: true, new: true}
+    );
+
+    if(!user){
+        return res.status(404).json({message: 'user not found'});
     }
-    // process.exit(0)
+    res.json('userUpdated')
+   }catch(err){
+    res.status(500).json(err)
+   }
     },
     // async deleteFriend(req,res){
 
