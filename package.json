@@ -1,5 +1,5 @@
 {
-  "name":"PeerReview",
+  "name":"peer_review",
   "version":"1",
   "description": "The backend to an application where users can post thoughts and react to others",
   "main":"index.js",
