@@ -1,4 +1,5 @@
 const {Thought, User} = require('../models');
+const { findOne } = require('../models/Users');
 
 module.exports = {
 
@@ -57,9 +58,26 @@ try{
 }
     },
 
-    // async addFriend(req,res){
-
-    // },
+    async addFriend(req,res){
+        //make a POST create friend 
+    try{
+        const user = await User.findOneAndUpdate(
+            {_id:req.params._id},
+            {$addToSet: {friends: req.body}},
+            {new:true}
+        )
+        // const user = await User.findOne({_id: req.params._id})
+        // user.friends.push({_id: req.body._id})
+        //  await user.save()
+        if(!user){
+            return res.status(404).json({message: 'usernot found'})
+        }
+    }catch(err){
+        console.log(err)
+        res.status(500).json(err)
+    }
+    // process.exit(0)
+    },
     // async deleteFriend(req,res){
 
     // },
