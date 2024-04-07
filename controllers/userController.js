@@ -76,7 +76,7 @@ module.exports = {
             for (tempThought of deleteThoughts) {
                 await Thought.findOneAndDelete({ _id: tempThought._id })
             }
-
+            console.log(deleteThoughts)
             res.json({ message: 'User Deleted' });
         } catch (err) {
             res.status(500).json(err);
