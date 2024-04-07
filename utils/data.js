@@ -130,11 +130,12 @@ const getUser = () => {
 const getRandomThoughts = (int) => {
   for (let i = 0; i < int; i++) {
     const thoughtText = getRandomArrItem(thoughts);
-    const reactions = [...getReactions(3)]
-
+    const reactions = getReactions(3)
+    
     thoughtData.push({
       thoughtText,
       reactions
+      
     })
   }
 };
@@ -146,13 +147,14 @@ const getReactions = (int) => {
   }
 
   const results = [];
-  
+
   for (let i = 0; i < int; i++) {
     results.push({
-      reactions: getRandomArrItem(reactions),
+      reactionBody: getRandomArrItem(reactions),
       username: getRandomUser(),
     });
   }
+
   return results;
 };
 

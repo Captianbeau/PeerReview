@@ -5,7 +5,7 @@ module.exports = {
     //gets all thoughts
     async getThoughts(req, res) {
         try {
-            const thoughts = await Thought.find().populate('user');
+            const thoughts = await Thought.find().populate('user').populate('reactions');
 
             res.status(200).json(thoughts)
         } catch (err) {
