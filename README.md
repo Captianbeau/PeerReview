@@ -2,11 +2,7 @@
 ## Description
 This is the back end for an app that allows users to post their thoughts and respond to other people’s thoughts.  It uses a nosql database and uses mongoose to connect to it.  It has the capability to support creating, updating, and deleting posts and users.  Reactions are stored in a schema through thoughts. Also users can add and delete friends from their profile.
 
-## Table of Contents (Optional)
-
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
+## Table of Contents 
 
 - [Installation](#installation)
 - [Usage](#usage)
